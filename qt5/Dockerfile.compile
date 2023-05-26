@@ -1,0 +1,42 @@
+FROM gregabram/qt5-base
+
+RUN apt update && apt upgrade -y && \
+    apt -y install vim        \
+        libxrender1 \
+        xcb \
+        libxkbcommon-x11-0 \
+        apt-file \
+        libxcb-icccm4-dev \
+        libxcb-shm0-dev \
+        libxcb-image0-dev \
+        libxcb-render-util0-dev \
+        libxcb-keysyms1 \
+        libxkbcommon-x11-0 \
+        libnvidia-egl-wayland-dev \
+        libnvidia-egl-wayland1 \
+        libxcb-keysyms1-dev \
+        x11-xserver-utils \
+        libxcb-randr0-dev \
+        libxcb-shape0-dev \
+        libxcb-sync0-dev \
+        libxcb-xfixes0-dev \
+        libxcb-xinerama0-dev \
+        libxcb-xkb-dev \
+        libxkbcommon-dev \
+        libxkbcommon-x11-dev 
+
+COPY qt-everywhere-opensource-src-5.15.9.tar.xz /tmp/qt-everywhere-opensource-src-5.15.9.tar.xz
+
+RUN cd /tmp && \
+    tar xf qt-everywhere-opensource-src-5.15.9.tar.xz && \
+    mkdir build && \
+    cd build && \
+    ../qt-everywhere-src-5.15.9/configure \
+        -developer-build \
+        -opensource \
+        -nomake tests \
+        -no-harfbuzz \
+        --prefix=/usr/local \
+        -bundled-xcb-xinput \
+        -confirm-license -nomake examples && \
+    make -j 8 install
