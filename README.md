@@ -1,5 +1,5 @@
 
-#Qt5.15 Development Container
+# Qt5.15 Development Container
 
 Stuff in this directory creates the Qt5.15 development image that is available on the docker hub as gregabram/qt5.   If you are running docker, you *should* be able to simply 
 
@@ -105,7 +105,7 @@ and up it came!   Subsequently, since the wave build was in the host file system
 
 **apptainer run qt5_latest.sif examples/qt3d/wave/build/wave**
 
-##Extending the image
+## Extending the image
 
 I've included the **emacs** directory as a example of how one might extend the qt5 image with other stuff necessary to build an end-user application using Qt5.  In that directory there is a Dockerfile that begins with **gregabram/qt5**, then uses apt-get to install emacs.   Again, if you built your own, change the FROM line to reference your own qt5 image.
 
